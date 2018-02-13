@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * author  redLi
- * package com.mmall.controller.backend
- * 2018/1/6
+ * @author  redLi
+ * @package com.mmall.controller.backend
+ * @time 2018/1/6
  */
 @Controller
 @RequestMapping("/manage/order/")

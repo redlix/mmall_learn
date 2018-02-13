@@ -1,9 +1,9 @@
 package com.mmall.vo;
 
 /**
- * author  redLi
- * package com.mmall.vo
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.vo
+ * @time 2018/1/5
  */
 public class ShippingVo {
     private String receiverName;

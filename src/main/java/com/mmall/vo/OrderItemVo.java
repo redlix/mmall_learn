@@ -3,9 +3,9 @@ package com.mmall.vo;
 import java.math.BigDecimal;
 
 /**
- * author  redLi
- * package com.mmall.vo
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.vo
+ * @time 2018/1/5
  */
 public class OrderItemVo {
     private Long orderNo;

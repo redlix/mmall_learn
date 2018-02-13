@@ -7,9 +7,9 @@ import com.mmall.vo.OrderVo;
 import java.util.Map;
 
 /**
- * author  redLi
- * package com.mmall.service
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.service
+ * @time 2018/1/5
  */
 public interface IOrderService {
 

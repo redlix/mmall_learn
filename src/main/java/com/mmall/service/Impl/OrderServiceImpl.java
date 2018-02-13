@@ -56,9 +56,9 @@ import java.util.Random;
 
 
 /**
- * author  redLi
- * package com.mmall.service.Impl
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.service.Impl
+ * @time 2018/1/5
  */
 @Service("iOrderService")
 public class OrderServiceImpl implements IOrderService {

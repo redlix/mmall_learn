@@ -23,9 +23,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * author  redLi
- * package com.mmall.controller.portal
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.controller.portal
+ * @time 2018/1/5
  */
 @Controller
 @RequestMapping("/order/")

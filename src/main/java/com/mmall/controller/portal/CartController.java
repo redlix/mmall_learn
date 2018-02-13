@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * author  redLi
- * package com.mmall.controller.portal
- * 2018/1/4
+ * @author  redLi
+ * @package com.mmall.controller.portal
+ * @time 2018/1/4
  */
 @Controller
 @RequestMapping("/cart/")

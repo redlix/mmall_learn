@@ -5,9 +5,9 @@ import com.mmall.common.ServerResponse;
 import com.mmall.pojo.Shipping;
 
 /**
- * author  redLi
- * package com.mmall.service
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.service
+ * @time 2018/1/5
  */
 public interface IShippingService {
 

@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * author  redLi
- * package com.mmall.service.Impl
- * 2018/1/5
+ * @author  redLi
+ * @package com.mmall.service.Impl
+ * @time 2018/1/5
  */
 @Service("iShippingService")
 public class ShippingServiceImpl implements IShippingService{

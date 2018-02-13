@@ -3,9 +3,9 @@ package com.mmall.util;
 import java.math.BigDecimal;
 
 /**
- * author  redLi
- * package com.mmall.util
- * 2018/1/4
+ * @author  redLi
+ * @package com.mmall.util
+ * @time 2018/1/4
  */
 public class BigDecimalUtil {
 
