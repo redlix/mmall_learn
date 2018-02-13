@@ -16,9 +16,10 @@ import java.util.UUID;
 import static com.mmall.common.TokenCache.TOKEN_PREFIX;
 
 /**
- * Created by redLi on 2017/12/30.
+ * @author rerdli
+ * @time
+ * @description: 声明Service接口
  */
-//声明Service接口
 @Service("iUserService")
 public class UserServiceImple implements IUserService {
 

@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by redLi on 2018/1/3.
+ * @author rerdli
+ * @time
+ * @description:
  */
 public class FtpUtil {
 

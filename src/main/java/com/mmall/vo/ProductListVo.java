@@ -3,7 +3,9 @@ package com.mmall.vo;
 import java.math.BigDecimal;
 
 /**
- * Created by redLi on 2018/1/3.
+ * @author rerdli
+ * @time
+ * @description:
  */
 public class ProductListVo {
     private Integer id;

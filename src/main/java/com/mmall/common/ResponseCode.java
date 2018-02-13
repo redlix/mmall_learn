@@ -1,13 +1,11 @@
 package com.mmall.common;
 
 /**
- * Created by redLi on 2017/12/30.
- * 响应的扩展枚举类
+ * @author redli
+ * @time
+ * @description: 枚举类型声明返回值,响应的扩展枚举类
+ *
  */
-
-/*
-* 枚举类型声明返回值
-* */
 public enum ResponseCode {
 
     SUCCESS(0, "SUCCESS"),

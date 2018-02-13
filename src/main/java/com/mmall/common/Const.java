@@ -6,7 +6,7 @@ import com.mmall.pojo.Product;
 import java.util.Set;
 
 /**
- * Created by redLi on 2017/12/30.
+ * @author redli
  * 常量类
  */
 public class Const {

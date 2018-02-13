@@ -9,7 +9,9 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
- * Created by redLi
+ * @author rerdli
+ * @time
+ * @description:
  */
 public class PropertiesUtil {
 

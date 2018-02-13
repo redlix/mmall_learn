@@ -3,7 +3,9 @@ package com.mmall.util;
 import java.security.MessageDigest;
 
 /**
- * Created by redLi
+ * @author rerdli
+ * @time
+ * @description:
  */
 public class MD5Util {
 

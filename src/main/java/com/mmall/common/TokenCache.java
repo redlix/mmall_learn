@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by redLi on 2017/12/31.
+ * @author redli
+ * @time
+ * @description
  */
 public class TokenCache {
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);

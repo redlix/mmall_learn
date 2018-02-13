@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by redLi on 2017/12/31.
+ * @author rerdli
+ * @time
+ * @description
  */
 @Controller
 @RequestMapping("/manage/user")

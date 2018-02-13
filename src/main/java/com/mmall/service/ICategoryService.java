@@ -6,7 +6,9 @@ import com.mmall.pojo.Category;
 import java.util.List;
 
 /**
- * Created by redLi on 2018/1/2.
+ * @author rerdli
+ * @time
+ * @description
  */
 public interface ICategoryService {
 

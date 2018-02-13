@@ -6,10 +6,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import java.io.Serializable;
 
 /**
- * Created by redLi on 2017/12/30.
+ * @author redli
+ * @time
+ * @description:注解  去掉为空的返回值的key
  */
-
-// 注解  去掉为空的返回值的key
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ServerResponse<T> implements Serializable{
 

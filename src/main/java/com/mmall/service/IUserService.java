@@ -4,7 +4,9 @@ import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 
 /**
- * Created by redLi on 2017/12/30.
+ * @author rerdli
+ * @time
+ * @description
  */
 public interface IUserService {
     ServerResponse<User> login(String username, String password);
