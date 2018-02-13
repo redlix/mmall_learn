@@ -4,9 +4,9 @@ import com.mmall.common.ServerResponse;
 import com.mmall.vo.CartVo;
 
 /**
- * author  redLi
  * package com.mmall.service
  * 2018/1/4
+ * @author redLi
  */
 public interface ICartService {
 
