@@ -3,9 +3,7 @@ package com.mmall.common;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -13,9 +11,8 @@ import java.util.concurrent.TimeUnit;
  * @time
  * @description
  */
+@Slf4j
 public class TokenCache {
-    private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
-
     //声明常量token前缀
     public static final String TOKEN_PREFIX = "token_";
 
@@ -43,7 +40,7 @@ public class TokenCache {
             return value;
 
         } catch (Exception e){
-            logger.error("loggerCache get error", e);
+            log.error("loggerCache get error", e);
         }
         return null;
     }
