@@ -20,6 +20,7 @@ import java.util.UUID;
 @Slf4j
 public class FileServiceImpl implements IFileService {
 
+    @Override
     public String upload(MultipartFile file, String path){
         String fileName = file.getOriginalFilename();
         String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);

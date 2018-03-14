@@ -91,6 +91,7 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private ShippingMapper shippingMapper;
 
+    @Override
     public ServerResponse createOrder(Integer userId, Integer shippingId) {
         //从购物车中获取数据
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
@@ -128,6 +129,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccess(orderVo);
     }
 
+    @Override
     public ServerResponse<String> cancel(Integer userId, Long orderNo) {
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
         if (order == null) {
@@ -147,6 +149,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByError();
     }
 
+    @Override
     public ServerResponse getOrderCartProduct(Integer userId) {
         OrderProductVo orderProductVo = new OrderProductVo();
         //从购物车中获取数据
@@ -172,6 +175,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
+    @Override
     public ServerResponse<OrderVo> getOrderDetail(Integer userId, Long orderNo) {
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
         if (order != null) {
@@ -182,6 +186,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMsg("没有找到该订单");
     }
 
+    @Override
     public ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Order> orderList = orderMapper.selectByUserId(userId);
@@ -353,6 +358,7 @@ public class OrderServiceImpl implements IOrderService {
         return shippingVo;
     }
 
+    @Override
     public ServerResponse pay(Long orderNo, Integer userId, String path) {
         Map<String, String> resultMap = Maps.newHashMap();
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
@@ -472,6 +478,7 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
+    @Override
     public ServerResponse aliCallback(Map<String, String> params) {
         Long orderNo = Long.parseLong(params.get("out_trade_no"));
         String tradeNo = params.get("trade_no");
@@ -501,6 +508,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccess();
     }
 
+    @Override
     public ServerResponse queryOrderPayStatus(Integer userId, Long orderNo) {
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
         if (order == null) {
@@ -513,6 +521,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     //backend
+    @Override
     public ServerResponse<PageInfo> manageList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Order> orderList = orderMapper.selectAllOrder();
@@ -522,6 +531,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
+    @Override
     public ServerResponse<OrderVo> manageDetail(Long orderNo) {
         Order order = orderMapper.selectByOrderNo(orderNo);
         if (order != null) {
@@ -532,6 +542,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMsg("订单不存在");
     }
 
+    @Override
     public ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Order order = orderMapper.selectByOrderNo(orderNo);
@@ -546,6 +557,7 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMsg("订单不存在");
     }
 
+    @Override
     public ServerResponse<String> manageSendGoods(Long orderNo) {
         Order order = orderMapper.selectByOrderNo(orderNo);
         if (order != null) {

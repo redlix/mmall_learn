@@ -40,6 +40,7 @@ public class ProductServiceImpl implements IProductService {
     @Autowired
     private ICategoryService iCategoryService;
 
+    @Override
     public ServerResponse saveOrUpdateProduct(Product product){
         if(product != null){
             if(StringUtils.isNotBlank(product.getSubImages())){
@@ -65,6 +66,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createByErrorMsg("新增或更新参数错误");
     }
 
+    @Override
     public ServerResponse<String> setStatus(Integer productId, Integer status){
         if(productId == null || status == null){
             return ServerResponse.createByErrorCodeMsg(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -79,6 +81,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createByErrorMsg("修改销售产品状态失败");
     }
 
+    @Override
     public ServerResponse<ProductDetailVo> manageProductDetail(Integer productId){
         if(productId == null){
             return ServerResponse.createByErrorCodeMsg(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -121,6 +124,7 @@ public class ProductServiceImpl implements IProductService {
         return productDetailVo;
     }
 
+    @Override
     public ServerResponse<PageInfo> getProductList(int pageNum, int pageSize){
         //startPage--开始
         //填充sql
@@ -154,6 +158,7 @@ public class ProductServiceImpl implements IProductService {
         return productListVo;
     }
 
+    @Override
     public ServerResponse<PageInfo> searchProduct(String productName, Integer productId, int pageNum, int pageSize){
         PageHelper.startPage(pageNum, pageSize);
         if(StringUtils.isNotBlank(productName)){
@@ -173,6 +178,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
+    @Override
     public ServerResponse<ProductDetailVo> getProductDetail(Integer productId){
         if(productId == null){
             return ServerResponse.createByErrorCodeMsg(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -188,6 +194,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(productDetailVo);
     }
 
+    @Override
     public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword, Integer categoryId, int pageNum, int pageSize, String orderBy){
         if(StringUtils.isBlank(keyword) && categoryId == null){
             return ServerResponse.createByErrorCodeMsg(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());

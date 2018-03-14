@@ -65,7 +65,7 @@ class UserController {
 
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> getInfo(HttpSession session){
+    public ServerResponse<User> getUserInfo(HttpSession session){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user != null){
             return ServerResponse.createBySuccess(user);
@@ -91,9 +91,9 @@ class UserController {
         return iUserService.forgetResetPassword(username, passwordNew, forgetToken);
     }
 
-    /*
+    /**
     * 登录状态修改密码
-    * */
+    */
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String passwordOld, String passwordNew){
@@ -104,12 +104,12 @@ class UserController {
         return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
 
-    /*
+    /**
     * 更新个人信息
-    * */
+    */
     @RequestMapping(value = "update_info.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> update_info(HttpSession session, User user){
+    public ServerResponse<User> updateInfo(HttpSession session, User user){
         User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
         if(currentUser == null){
             return ServerResponse.createByErrorMsg("用户未登录");
@@ -127,12 +127,12 @@ class UserController {
         return  response;
     }
 
-    /*
+    /**
     * 获取个人详细信息
-    * */
+    */
     @RequestMapping(value = "get_info.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<User> get_info(HttpSession session){
+    public ServerResponse<User> getInfo(HttpSession session){
         User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
         if(currentUser == null){
             return ServerResponse.createByErrorCodeMsg(ResponseCode.NEED_LOGIN.getCode(), "未登录，需要强制登陆");

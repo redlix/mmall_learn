@@ -30,11 +30,20 @@ public class Const {
     }
 
     public interface Role{
-        int ROLE_CUSTOMER = 0;  //普通用户
-        int ROLE_ADMIN = 1;     //管理员
+        /**
+         * 普通用户
+         */
+        int ROLE_CUSTOMER = 0;
+        /**
+         * 管理员
+         */
+        int ROLE_ADMIN = 1;
     }
 
     public enum ProductStatusEnum{
+        /**
+         * 在线状态
+         */
         ON_SALE(1, "在线");
         private String value;
         private int code;
@@ -54,6 +63,9 @@ public class Const {
     }
 
     public enum OrderStatusEnum{
+        /**
+         * 取消支付
+         */
         CANCELED(0,"已取消"),
         NO_PAY(10,"未支付"),
         PAID(20,"已付款"),
@@ -95,6 +107,9 @@ public class Const {
     }
 
     public enum PayPlatformEnum{
+        /**
+         * 1代表支付宝
+         */
         ALIPAY(1,"支付宝");
 
         PayPlatformEnum(int code,String value){
@@ -114,6 +129,9 @@ public class Const {
     }
 
     public enum PaymentTypeEnum{
+        /**
+         * 1代表在线支付
+         */
         ONLINE_PAY(1,"在线支付");
 
         PaymentTypeEnum(int code,String value){

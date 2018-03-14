@@ -6,7 +6,7 @@ import com.mmall.common.TokenCache;
 import com.mmall.dao.UserMapper;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
-import com.mmall.util.MD5Util;
+import com.mmall.util.Md5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +21,11 @@ import static com.mmall.common.TokenCache.TOKEN_PREFIX;
  * @description: 声明Service接口
  */
 @Service("iUserService")
-public class UserServiceImple implements IUserService {
+public class UserServiceImpl implements IUserService {
 
-    //注入Mapper
+    /**
+     * 注入Mapper
+     */
     @Autowired
     private UserMapper userMapper;
 
@@ -35,7 +37,7 @@ public class UserServiceImple implements IUserService {
             return ServerResponse.createByErrorMsg("用户名不存在");
         }
 
-        String md5Password = MD5Util.MD5EncodeUtf8(password);
+        String md5Password = Md5Util.md5encodeutf8(password);
         User user = userMapper.selectLogin(username, md5Password);
         if(user == null){
             return ServerResponse.createByErrorMsg("密码错误");
@@ -44,6 +46,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createBySuccess("登陆成功", user);
     }
 
+    @Override
     public ServerResponse<String> register(User user){
         ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
         if(!validResponse.isSuccess()){
@@ -55,7 +58,7 @@ public class UserServiceImple implements IUserService {
         }
         user.setRole(Const.Role.ROLE_CUSTOMER);
         //MD5加密
-        user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+        user.setPassword(Md5Util.md5encodeutf8(user.getPassword()));
         int resultCount = userMapper.insert(user);
         if(resultCount == 0){
             return ServerResponse.createByErrorMsg("注册失败");
@@ -63,6 +66,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createBySuccessMsg("注册成功");
     }
 
+    @Override
     public ServerResponse<String> checkValid(String str, String type){
         if(StringUtils.isNotBlank(type)){
             //开始校验
@@ -84,6 +88,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createBySuccessMsg("校验成功");
     }
 
+    @Override
     public ServerResponse<String> selectQuestion(String username){
         ServerResponse validResponse = this.checkValid(username, Const.USERNAME);
         if(validResponse.isSuccess()){
@@ -97,6 +102,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createByErrorMsg("找回密码问题为空");
     }
 
+    @Override
     public ServerResponse<String> checkAnswer(String username, String password, String answer){
         int resultCount = userMapper.checkAnswer(username, password, answer);
         if(resultCount > 0){
@@ -107,6 +113,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createByErrorMsg("问题答案错误");
     }
 
+    @Override
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken){
         if(StringUtils.isBlank(forgetToken)){
             return ServerResponse.createByErrorMsg("参数错误，需要传递token");
@@ -122,7 +129,7 @@ public class UserServiceImple implements IUserService {
             return ServerResponse.createByErrorMsg("token无效或者过期");
         }
         if(StringUtils.equals(forgetToken, token)) {
-            String md5PassWord = MD5Util.MD5EncodeUtf8(passwordNew);
+            String md5PassWord = Md5Util.md5encodeutf8(passwordNew);
             int rowCount = userMapper.updatPasswordByUsername(username, md5PassWord);
 
             if (rowCount > 0) {
@@ -134,14 +141,15 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createByErrorMsg("修改密码失败");
     }
 
+    @Override
     public ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user){
         //防止横向越权，要校验该用户的旧密码，必须指定是该用户，因为会查询count(1)，不指定id，结果九尾true
-        int resultCount = userMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld), user.getId());
+        int resultCount = userMapper.checkPassword(Md5Util.md5encodeutf8(passwordOld), user.getId());
         if(resultCount == 0){
             return ServerResponse.createByErrorMsg("旧密码错误");
         }
 
-        user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
+        user.setPassword(Md5Util.md5encodeutf8(passwordNew));
         int updateCount = userMapper.updateByPrimaryKeySelective(user);
         if(updateCount > 0){
             return ServerResponse.createBySuccessMsg("密码更新成功");
@@ -149,6 +157,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createByErrorMsg("密码更新失败");
     }
 
+    @Override
     public ServerResponse<User> updateInfo(User user){
         //username 不能被更新
         //email也要进行校验，检验新的email是不是已经存在，并且存在的email如果相同的话，不能是我们当前这个用户
@@ -174,6 +183,7 @@ public class UserServiceImple implements IUserService {
         return ServerResponse.createByErrorMsg("更新个人信息失败");
     }
 
+    @Override
     public ServerResponse<User> getInfo(Integer userId){
         User user = userMapper.selectByPrimaryKey(userId);
 
@@ -185,10 +195,10 @@ public class UserServiceImple implements IUserService {
     }
 
     //backend
-    /*
+    /**
     * 校验是否是管理员
-    *
-    * */
+    */
+    @Override
     public ServerResponse checkAdmin(User user){
         if(user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
             return ServerResponse.createBySuccess();
