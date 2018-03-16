@@ -1,29 +1,40 @@
 package com.mmall.common;
 
 import com.mmall.util.PropertiesUtil;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.*;
+import redis.clients.util.Hashing;
+import redis.clients.util.Sharded;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author redLi
- * @package com.mmall.common
- * @time 2018/03/13 23:13
+ * @package com.mmall.util
+ * @time 2018/03/15 23:16
  * @description:
  */
-public class RedisPool {
+public class RedisShardedPool {
     /**
      * jedis连接池
      */
-    private static JedisPool pool;
+    private static ShardedJedisPool pool;
     /**
-     * redisIp
+     * redis1Ip
      */
-    private static String redisIp = PropertiesUtil.getProperty("redis1.ip");
+    private static String redis1Ip = PropertiesUtil.getProperty("redis1.ip");
     /**
-     * redisPort
+     * redis1Port
      */
-    private static Integer redisPort = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
+    private static Integer redis1Port = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
+    /**
+     * redis2Ip
+     */
+    private static String redis2Ip = PropertiesUtil.getProperty("redis2.ip");
+    /**
+     * redis2Port
+     */
+    private static Integer redis2Port = Integer.parseInt(PropertiesUtil.getProperty("redis2.port"));
     /**
      * 最大连接数
      */
@@ -58,32 +69,43 @@ public class RedisPool {
         //连接耗尽的时候，是否会阻塞，false回抛出异常，true阻塞直到超时
         config.setBlockWhenExhausted(true);
 
-        pool = new JedisPool(config, redisIp, redisPort, 1000 * 2);
+        JedisShardInfo info1 = new JedisShardInfo(redis1Ip, redis1Port, 1000 * 2);
+        JedisShardInfo info2 = new JedisShardInfo(redis2Ip, redis2Port, 1000 * 2);
+
+        List<JedisShardInfo> jedisShardInfoList = new ArrayList<JedisShardInfo>(2);
+
+        jedisShardInfoList.add(info1);
+        jedisShardInfoList.add(info2);
+
+        pool = new ShardedJedisPool(config, jedisShardInfoList, Hashing.MURMUR_HASH, Sharded.DEFAULT_KEY_TAG_PATTERN);
     }
 
     static {
         initPool();
     }
 
-    public static Jedis getJedis() {
+    public static ShardedJedis getShardedJedis() {
         return pool.getResource();
     }
 
-    public static void returnBrokenResource(Jedis jedis) {
-        pool.returnBrokenResource(jedis);
+    public static void returnBrokenResource(ShardedJedis shardedJedis) {
+        pool.returnBrokenResource(shardedJedis);
     }
 
-    public static void returnResource(Jedis jedis) {
-        pool.returnResource(jedis);
+    public static void returnResource(ShardedJedis shardedJedis) {
+        pool.returnResource(shardedJedis);
     }
 
     public static void main(String[] args) {
-        Jedis jedis = pool.getResource();
-        jedis.set("redlikey", "redlivalue");
-        returnResource(jedis);
+        ShardedJedis shardedJedis = pool.getResource();
 
+        for (int i = 0; i < 10; i++) {
+            shardedJedis.set("key" + i, "value" + i);
+        }
+
+        returnResource(shardedJedis);
         //临时调用，销毁连接池中的所有连接
-        pool.destroy();
+        //pool.destroy();
         System.out.println("program is end");
     }
 }
