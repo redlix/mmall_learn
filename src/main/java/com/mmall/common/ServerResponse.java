@@ -17,7 +17,10 @@ public class ServerResponse<T> implements Serializable{
     private String msg;
     private T data;
 
-    //构造器
+    /**
+     * 构造器
+     * @param status
+     */
     private ServerResponse(int status){
         this.status = status;
     }
@@ -38,9 +41,10 @@ public class ServerResponse<T> implements Serializable{
         this.msg = msg;
     }
 
-    /*
-    * 添加Json注解，序列化后不会显示isSuccess
-    * */
+    /**
+     * 添加Json注解，序列化后不会显示isSuccess
+     * @return
+     */
     @JsonIgnore
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.getCode();
@@ -58,9 +62,11 @@ public class ServerResponse<T> implements Serializable{
         return msg;
     }
 
-    /*
-    * 泛型静态方法开放接口
-    * */
+    /**
+     *  泛型静态方法开放接口
+     * @param <T>
+     * @return
+     */
     public static <T> ServerResponse<T> createBySuccess(){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode());
     }
