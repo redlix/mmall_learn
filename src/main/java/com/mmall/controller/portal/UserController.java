@@ -150,7 +150,6 @@ class UserController {
         if (response.isSuccess()) {
             response.getData().setUsername(currentUser.getUsername());
             RedisShardedPoolUtil.setEx(loginToken, JsonUtil.objToString(response.getData()), Const.RedisCacheExTime.REDIS_SESSION_EXTIME);
-            //session.setAttribute(Const.CURRENT_USER, response.getData());
         }
         return response;
     }
