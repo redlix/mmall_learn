@@ -27,6 +27,11 @@ public interface IUserService {
 
     ServerResponse<User> getInfo(Integer userId);
 
-    //backend
+    /**
+     * backend
+     *
+     * @param user
+     * @return
+     */
     ServerResponse checkAdmin(User user);
 }
