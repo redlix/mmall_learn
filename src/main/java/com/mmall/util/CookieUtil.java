@@ -18,6 +18,12 @@ public class CookieUtil {
     private final static String COOKIE_DOMAIL = ".redli.xin";
     private final static String COOKIE_NAME = "mmall_login_token";
 
+    /**
+     * 读取cookie
+     *
+     * @param request
+     * @return
+     */
     public static String readLoginToken(HttpServletRequest request) {
         Cookie[] cks = request.getCookies();
         if (cks != null) {
@@ -32,6 +38,12 @@ public class CookieUtil {
         return null;
     }
 
+    /**
+     * 写cookie
+     *
+     * @param response
+     * @param token
+     */
     public static void writeLoginToken(HttpServletResponse response, String token) {
         Cookie ck = new Cookie(COOKIE_NAME, token);
         ck.setDomain(COOKIE_DOMAIL);
@@ -44,6 +56,12 @@ public class CookieUtil {
         response.addCookie(ck);
     }
 
+    /**
+     * 删除cookie
+     *
+     * @param request
+     * @param response
+     */
     public static void delLoginToken(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cks = request.getCookies();
         if (cks != null) {

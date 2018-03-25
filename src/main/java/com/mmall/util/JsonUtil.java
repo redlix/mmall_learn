@@ -105,7 +105,7 @@ public class JsonUtil {
      * @param <T>
      * @return
      */
-    public static <T> T string2Obj(String str, Class<?> collectionClass, Class<?>... elementClasses) {
+    public static <T> T stringToObj(String str, Class<?> collectionClass, Class<?>... elementClasses) {
         JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
         try {
             return objectMapper.readValue(str, javaType);
@@ -142,7 +142,7 @@ public class JsonUtil {
         log.info("user1Json:{}", user1Json);
         log.info("user1JsonPretty:{}", user1JsonPretty);
 
-        User user1 = JsonUtil.string2Obj(user1Json, User.class);
+        User user1 = JsonUtil.stringToObj(user1Json, User.class);
 
         List<User> userList = Lists.newArrayList();
         userList.add(user1);
@@ -152,7 +152,7 @@ public class JsonUtil {
         log.info(userListStr);
         List<User> userListObj1 = JsonUtil.stringToObj(userListStr, new TypeReference<List<User>>() {
         });
-        List<User> userListObj2 = JsonUtil.string2Obj(userListStr, List.class, User.class);
+        List<User> userListObj2 = JsonUtil.stringToObj(userListStr, List.class, User.class);
         System.out.println("end");
     }
 }
