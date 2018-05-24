@@ -122,9 +122,9 @@ public class JsonUtil {
 
 //        //{"name":"Geely","id":666}
         String json = "{\"name\":\"redli\",\"color\":\"blue\",\"id\":666}";
-        TestPojo testPojoObject = JsonUtil.stringToObj(json,TestPojo.class);
+        TestPojo testPojoObject = JsonUtil.stringToObj(json, TestPojo.class);
         String testPojoJson = JsonUtil.objToString(testPojo);
-        log.info("testPojoJson:{}",testPojoJson);
+        log.info("testPojoJson:{}", testPojoJson);
         log.info("end");
 
         User user = new User();

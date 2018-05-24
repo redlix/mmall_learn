@@ -21,7 +21,7 @@ public class FtpUtil {
     private static String ftpUser = PropertiesUtil.getProperty("ftp.user");
     private static String ftpPass = PropertiesUtil.getProperty("ftp.pass");
 
-    private FtpUtil(String ip, int port, String user, String pwd){
+    private FtpUtil(String ip, int port, String user, String pwd) {
         this.ip = ip;
         this.port = port;
         this.user = user;
@@ -42,7 +42,7 @@ public class FtpUtil {
         boolean upload = true;
         FileInputStream fis = null;
         //连接FTP服务器
-        if(connectServer(this.ip, this.port, this.user, this.pwd)){
+        if (connectServer(this.ip, this.port, this.user, this.pwd)) {
             try {
                 ftpClient.changeWorkingDirectory(remotePath);
                 ftpClient.setBufferSize(1024);
@@ -51,7 +51,7 @@ public class FtpUtil {
                 //打开本地上传被动模式
                 ftpClient.enterLocalPassiveMode();
 
-                for(File fileItem : fileList){
+                for (File fileItem : fileList) {
                     fis = new FileInputStream(fileItem);
                     ftpClient.storeFile(fileItem.getName(), fis);
                 }
@@ -66,7 +66,7 @@ public class FtpUtil {
         return upload;
     }
 
-    private boolean connectServer(String ip, int port, String user, String pwd){
+    private boolean connectServer(String ip, int port, String user, String pwd) {
         boolean isSuccess = false;
         ftpClient = new FTPClient();
         try {
@@ -77,7 +77,6 @@ public class FtpUtil {
         }
         return isSuccess;
     }
-
 
 
     private String ip;

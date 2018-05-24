@@ -29,9 +29,10 @@ public enum ResponseCode {
         this.desc = desc;
     }
 
-    /*
-    * 将构造器开放，以供调用
-    * */
+    /**
+     * 将构造器开放
+     * @return
+     */
     public int getCode(){
         return code;
     }

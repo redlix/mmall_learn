@@ -3,7 +3,7 @@ package com.mmall.vo;
 import java.math.BigDecimal;
 
 /**
- * @author  redLi
+ * @author redLi
  * @package com.mmall.vo
  * @time 2018/1/4
  */
@@ -14,7 +14,10 @@ public class CartProductVo {
     private Integer id;
     private Integer userId;
     private Integer productId;
-    private Integer quantity;//购物车中此商品的数量
+    /**
+     * 购物车中此商品的数量
+     */
+    private Integer quantity;
     private String productName;
     private String productSubtitle;
     private String productMainImage;
