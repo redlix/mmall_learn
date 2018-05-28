@@ -3,7 +3,9 @@
     <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 </head>
 <body>
-<h2>Hello World!</h2>
+<h2>Tomcat1!</h2>
+<h2>Tomcat1!</h2>
+<h2>Tomcat1!</h2>
 
 <h3>SpringMvc上传文件</h3>
 <form name="form1" action="/manage/product/upload.do" method="post" enctype="multipart/form-data">

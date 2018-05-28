@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 public class CookieUtil {
-    private final static String COOKIE_DOMAIL = ".redli.xin";
+    private final static String COOKIE_DOMAIN = ".redli.com";
     private final static String COOKIE_NAME = "mmall_login_token";
 
     /**
@@ -46,7 +46,7 @@ public class CookieUtil {
      */
     public static void writeLoginToken(HttpServletResponse response, String token) {
         Cookie ck = new Cookie(COOKIE_NAME, token);
-        ck.setDomain(COOKIE_DOMAIL);
+        ck.setDomain(COOKIE_DOMAIN);
         //设置在根目录
         ck.setPath("/");
         ck.setHttpOnly(true);
@@ -67,7 +67,7 @@ public class CookieUtil {
         if (cks != null) {
             for (Cookie ck : cks) {
                 if (StringUtils.equals(ck.getName(), COOKIE_NAME)) {
-                    ck.setDomain(COOKIE_DOMAIL);
+                    ck.setDomain(COOKIE_DOMAIN);
                     ck.setPath("/");
                     //0表示删除cookie
                     ck.setMaxAge(0);
