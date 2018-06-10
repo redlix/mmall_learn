@@ -165,6 +165,5 @@ public class CartServiceImpl implements ICartService {
             return false;
         }
         return cartMapper.selectCartProductCheckedStatusByUserId(userId) == 0;
-
     }
 }

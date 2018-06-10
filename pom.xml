@@ -156,7 +156,7 @@
         </dependency>
 
 
-        <!-- ftpclient -->
+        <!-- ftpClient -->
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
@@ -164,7 +164,6 @@
         </dependency>
 
         <!-- file upload -->
-
         <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -271,9 +270,7 @@
 
     </dependencies>
 
-
     <build>
-
         <resources>
             <resource>
                 <directory>src/main/resources.${deploy.type}</directory>
@@ -312,7 +309,6 @@
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 
     <profiles>
@@ -338,6 +334,4 @@
             </properties>
         </profile>
     </profiles>
-
-
 </project>

@@ -84,6 +84,10 @@ public class RedisShardedPool {
         initPool();
     }
 
+    public static ShardedJedis getJedis(){
+        return pool.getResource();
+    }
+
     public static ShardedJedis getShardedJedis() {
         return pool.getResource();
     }

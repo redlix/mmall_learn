@@ -21,15 +21,15 @@ import java.util.UUID;
 public class FileServiceImpl implements IFileService {
 
     @Override
-    public String upload(MultipartFile file, String path){
+    public String upload(MultipartFile file, String path) {
         String fileName = file.getOriginalFilename();
-        String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);
-        String uploadFileName = UUID.randomUUID().toString()+"."+fileExtensionName;
+        String fileExtensionName = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String uploadFileName = UUID.randomUUID().toString() + "." + fileExtensionName;
 
-        log.info("开始上传文件,上传文件的文件名:{},上传路径:{},新文件名:{}",fileName, path, uploadFileName);
+        log.info("开始上传文件,上传文件的文件名:{},上传路径:{},新文件名:{}", fileName, path, uploadFileName);
 
         File fileDir = new File(path);
-        if(!fileDir.exists()){
+        if (!fileDir.exists()) {
             fileDir.setWritable(true);
             fileDir.mkdirs();
         }

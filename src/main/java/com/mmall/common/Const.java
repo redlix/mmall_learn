@@ -39,8 +39,8 @@ public class Const {
         int UN_CHECKED = 0;
 
         String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
-        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
 
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
     }
 
     public interface Role {

@@ -33,7 +33,7 @@ public class RedisPool {
      */
     private static Integer maxIdle = Integer.parseInt(PropertiesUtil.getProperty("redis.max.idle", "10"));
     /**
-     * 在jedispool中最小的idle(空闲的)的jedis实例个数
+     * 在jedisPool中最小的idle(空闲的)的jedis实例个数
      */
     private static Integer minIdle = Integer.parseInt(PropertiesUtil.getProperty("redis.min.idle", "2"));
     /**
@@ -41,7 +41,7 @@ public class RedisPool {
      */
     private static Boolean testOnBorrow = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.borrow", "true"));
     /**
-     * 在borrow一个jedis实例时，是否进行验证操作，若赋值true，则放回jedispoll的jedis实例可用
+     * 在borrow一个jedis实例时，是否进行验证操作，若赋值true，则放回jedisPool的jedis实例可用
      */
     private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.return", "false"));
 
@@ -79,7 +79,7 @@ public class RedisPool {
 
     public static void main(String[] args) {
         Jedis jedis = pool.getResource();
-        jedis.set("redlikey", "redlivalue");
+        jedis.set("redliKey", "redliValue");
         returnResource(jedis);
 
         //临时调用，销毁连接池中的所有连接

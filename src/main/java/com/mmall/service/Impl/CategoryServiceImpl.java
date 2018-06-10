@@ -28,8 +28,8 @@ public class CategoryServiceImpl implements ICategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public ServerResponse addCategory(String categoryName, Integer parentId){
-        if(parentId == null || StringUtils.isBlank(categoryName)){
+    public ServerResponse addCategory(String categoryName, Integer parentId) {
+        if (parentId == null || StringUtils.isBlank(categoryName)) {
             return ServerResponse.createByErrorMsg("添加品类错误");
         }
         Category category = new Category();
@@ -38,7 +38,7 @@ public class CategoryServiceImpl implements ICategoryService {
         category.setStatus(true);
 
         int rowCount = categoryMapper.insert(category);
-        if(rowCount > 0){
+        if (rowCount > 0) {
             return ServerResponse.createBySuccess("添加品类成功");
         }
 
@@ -46,8 +46,8 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public ServerResponse updateCategoryName(String categoryName, Integer categoryId){
-        if(categoryId == null || StringUtils.isBlank(categoryName)){
+    public ServerResponse updateCategoryName(String categoryName, Integer categoryId) {
+        if (categoryId == null || StringUtils.isBlank(categoryName)) {
             return ServerResponse.createByErrorMsg("参数错误，请重新添加");
         }
         Category category = new Category();
@@ -56,16 +56,16 @@ public class CategoryServiceImpl implements ICategoryService {
 
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
 
-        if(rowCount > 0){
+        if (rowCount > 0) {
             return ServerResponse.createBySuccess("更新成功");
         }
         return ServerResponse.createByErrorMsg("更新品类名称失败");
     }
 
     @Override
-    public ServerResponse<List<Category>> getChildrenParallerCategory(Integer categoaryId){
-        List<Category> categoryList = categoryMapper.selectCategoryByParentId(categoaryId);
-        if(categoryList.isEmpty()){
+    public ServerResponse<List<Category>> getChildrenParallerCategory(Integer categoryId) {
+        List<Category> categoryList = categoryMapper.selectCategoryByParentId(categoryId);
+        if (categoryList.isEmpty()) {
             log.info("未找到当前分类的子分类");
         }
         return ServerResponse.createBySuccess(categoryList);
@@ -73,35 +73,41 @@ public class CategoryServiceImpl implements ICategoryService {
 
     /**
      * 递归查询本节点的id和孩子节点id
+     *
      * @param categoryId
      * @return
      */
     @Override
-    public ServerResponse<List<Integer>> selectCategoryAndChildById(Integer categoryId){
+    public ServerResponse<List<Integer>> selectCategoryAndChildById(Integer categoryId) {
         Set<Category> categorySet = Sets.newHashSet();
         findChildCategory(categorySet, categoryId);
 
         List<Integer> categoryIdList = Lists.newArrayList();
-        if(categoryId != null){
-            for(Category categoryItem : categorySet) {
+        if (categoryId != null) {
+            for (Category categoryItem : categorySet) {
                 categoryIdList.add(categoryItem.getId());
             }
         }
         return ServerResponse.createBySuccess(categoryIdList);
     }
 
-    //递归查询子节点
-    private Set<Category> findChildCategory(Set<Category> categorySet, Integer categoryId){
+    /**
+     * 递归查询子节点
+     *
+     * @param categorySet
+     * @param categoryId
+     * @return
+     */
+    private Set<Category> findChildCategory(Set<Category> categorySet, Integer categoryId) {
         Category category = categoryMapper.selectByPrimaryKey(categoryId);
-        if(category != null){
+        if (category != null) {
             categorySet.add(category);
         }
         //查找子结点
         List<Category> categoryList = categoryMapper.selectCategoryByParentId(categoryId);
-        for(Category categoryItem : categoryList){
+        for (Category categoryItem : categoryList) {
             findChildCategory(categorySet, categoryItem.getId());
         }
         return categorySet;
     }
-
 }
